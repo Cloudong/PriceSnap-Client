@@ -46,7 +46,7 @@ const NavItem = styled(NavLink)`
 `;
 
 function MainBar() {
-  const user = "";
+  const user = "jiwon";
   //const { user } = useUser();
   const navigate = useNavigate();
 
