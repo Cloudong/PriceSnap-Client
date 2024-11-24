@@ -10,7 +10,7 @@ const Container = styled.div`
 
 const TextContainer = styled.div`
   display: flex;
-  height: 770px;
+  height: 663px;
   background-image: url(${LandingImg});
   background-position: center;
   color: #432a00;
@@ -18,7 +18,7 @@ const TextContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   text-align: right;
-  padding-right: 200px;
+  padding-right: 95px;
 `;
 
 const TitleText = styled.h1`
@@ -32,7 +32,7 @@ const TitleText = styled.h1`
 const SubTitleText = styled.h1`
   font-family: "Inter", sans-serif;
   white-space: pre-wrap;
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 400;
   margin: 0;
 `;
