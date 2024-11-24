@@ -1,17 +1,13 @@
 name: MAIN CI
 
 on:
-  # trigger가 되길 바라는 action을 입력합니다. push / pull_request가 있습니다.
-  # 저는 main 브랜치에 push가 되면 actions을 실행하도록 설정했습니다.
   push:
-    branches:
-      - main
-    tags:
-      - "production-**"
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   Deploy:
-    # runner가 실행될 환경을 지정합니다.
     runs-on: ubuntu-latest
 
     # name은 단계별로 실행되는 액션들의 설명을 담은 것으로, 나중에 github action에서 workflow에 표시됩니다.
