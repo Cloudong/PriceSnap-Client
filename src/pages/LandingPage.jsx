@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import LandingImg from "../assets/LandingImg.png";
+import Button from "../components/Button";
 
 const Container = styled.div`
   width: calc(100%);
@@ -52,6 +53,7 @@ function LandingPage() {
         <SubTitleText>우리 가족 생활비를 위한</SubTitleText>
         <TitleText>물가 관리</TitleText>
         <SubText>{subtext}</SubText>
+        <Button className="yellow" title="KU_PRICESNAP 사용하러 가기" />
       </TextContainer>
     </Container>
   );
