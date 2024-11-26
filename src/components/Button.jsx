@@ -27,8 +27,8 @@ const StyledButton = styled.button`
   }
 
   &.green {
-    background-color: #366943;
-    border: 1px solid #366943;
+    background-color: #48582f;
+    border: 1px solid #48582f;
   }
 
   &.red {

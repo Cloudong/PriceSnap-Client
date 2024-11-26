@@ -35,16 +35,13 @@ function RegisterPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        "http://3.39.227.185:3001/api/auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ user_id: id, password, name: name }),
-        }
-      );
+      const response = await fetch("http:///api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_id: id, password, name: name }),
+      });
 
       if (response.ok) {
         navigate("/");
