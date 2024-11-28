@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Logo from "../assets/Logo.png";
 import Button from "../components/Button";
 import { FiUser } from "react-icons/fi";
+import { useUser } from "../api/UserContext";
 
 const Container = styled.div`
   width: calc(100%);
@@ -46,8 +47,7 @@ const NavItem = styled(NavLink)`
 `;
 
 function MainBar() {
-  const user = "jiwon";
-  //const { user } = useUser();
+  const { user } = useUser();
   const navigate = useNavigate();
 
   return (
