@@ -4,7 +4,7 @@ import styled from "styled-components";
 //전체 button style
 
 const StyledButton = styled.button`
-  min-width: 130px;
+  min-width: 135px;
   height: 32px;
   display: inline-block;
   text-align: center;
@@ -27,8 +27,8 @@ const StyledButton = styled.button`
   }
 
   &.green {
-    background-color: #366943;
-    border: 1px solid #366943;
+    background-color: #48582f;
+    border: 1px solid #48582f;
   }
 
   &.red {

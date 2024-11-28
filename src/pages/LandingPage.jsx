@@ -2,6 +2,7 @@ import styled from "styled-components";
 import LandingImg from "../assets/LandingImg.png";
 import Button from "../components/Button";
 import MainBar from "../bar/MainBar";
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../api/UserContext";
 
 const Container = styled.div`
@@ -40,10 +41,10 @@ const TitleText = styled.h1`
   margin: 0;
 `;
 
-const SubTitleText = styled.h1`
+const SubTitleText = styled.h3`
   font-family: "Inter", sans-serif;
   white-space: pre-wrap;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 400;
   margin: 0;
 
@@ -64,12 +65,12 @@ const UserContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-left: 40px;
   padding-right: 95px;
   padding-top: 20px;
 `;
 
 function LandingPage() {
+  const navigate = useNavigate();
   const { user } = useUser();
   const subtext =
     "계속 변동하는 물가에 맞게 생활하고 계신가요?\n합리적인 장바구니를 위해\nKU_PRICESNAP로 관리하세요.";
@@ -91,7 +92,13 @@ function LandingPage() {
                 물가 동향으로 효율적인 소비 생활을 계획해보세요!
               </SubTitleText>
             </TextContainer>
-            <Button title="물가 확인하기" className="brown" />
+            <Button
+              title="상세 물가 확인하기"
+              className="brown"
+              onClick={() => {
+                navigate("/search");
+              }}
+            />
           </UserContainer>
           <UserContainer>
             <TextContainer className="sub">
