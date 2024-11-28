@@ -36,7 +36,7 @@ function RegisterPage() {
 
     try {
       const response = await fetch(
-        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/auth/register",
+        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/users/register",
         {
           method: "POST",
           headers: {

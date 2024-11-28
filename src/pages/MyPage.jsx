@@ -35,14 +35,17 @@ function MyPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http:///api/auth/update-name", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ new_name: name }),
-      });
+      const response = await fetch(
+        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/users/update-name",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ new_name: name }),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
