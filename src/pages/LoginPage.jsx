@@ -4,6 +4,7 @@ import MainBar from "../bar/MainBar";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import InputFieldContainer from "../components/InputFieldContainer";
+import { useUser } from "../api/UserContext";
 
 const Container = styled.div`
   width: calc(100%);
@@ -28,13 +29,13 @@ const LoginForm = styled.form`
 function LoginPage() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  //const { login } = useUser();
+  const { login } = useUser();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      //await login(id, password);
+      await login(id, password);
       navigate("/");
     } catch (err) {}
   };

@@ -4,6 +4,7 @@ import MainBar from "../bar/MainBar";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import InputFieldContainer from "../components/InputFieldContainer";
+import { useUser } from "../api/UserContext";
 
 const Container = styled.div`
   width: calc(100%);
@@ -27,21 +28,24 @@ const MyPageForm = styled.form`
 
 function MyPage() {
   const [name, setName] = useState("");
-  //const { logout } = useUser();
+  const { logout } = useUser();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http:///api/auth/update-name", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ new_name: name }),
-      });
+      const response = await fetch(
+        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/users/update-name",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ new_name: name }),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -70,7 +74,7 @@ function MyPage() {
         <Button
           title="로그아웃"
           onClick={() => {
-            //logout();
+            logout();
             navigate("/");
           }}
           className="red"

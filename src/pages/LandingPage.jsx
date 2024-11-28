@@ -3,6 +3,7 @@ import LandingImg from "../assets/LandingImg.png";
 import Button from "../components/Button";
 import MainBar from "../bar/MainBar";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../api/UserContext";
 
 const Container = styled.div`
   width: calc(100%);
@@ -69,9 +70,8 @@ const UserContainer = styled.div`
 `;
 
 function LandingPage() {
-  const user = "jiwon";
   const navigate = useNavigate();
-  //const { user } = useUser();
+  const { user } = useUser();
   const subtext =
     "계속 변동하는 물가에 맞게 생활하고 계신가요?\n합리적인 장바구니를 위해\nKU_PRICESNAP로 관리하세요.";
   return (

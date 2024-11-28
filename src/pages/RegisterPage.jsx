@@ -35,13 +35,16 @@ function RegisterPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http:///api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user_id: id, password, name: name }),
-      });
+      const response = await fetch(
+        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/users/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_id: id, password, name: name }),
+        }
+      );
 
       if (response.ok) {
         navigate("/");
