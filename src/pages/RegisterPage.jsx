@@ -42,7 +42,11 @@ function RegisterPage() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ user_id: id, password, name: name }),
+          body: JSON.stringify({
+            userId: id,
+            name: name,
+            user_password: password,
+          }),
         }
       );
 
