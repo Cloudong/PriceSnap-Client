@@ -5,6 +5,7 @@ import RegisterPage from "../pages/RegisterPage";
 import MyPage from "../pages/MyPage";
 import PriceMainPage from "../pages/price/PriceMainPage";
 import PriceCategorySearchPage from "../pages/price/PriceCategorySearchPage";
+import PriceNameSearchPage from "../pages/price/PriceNameSearchPage";
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/search" element={<PriceMainPage />} />
+        <Route path="/search/keyward" element={<PriceNameSearchPage />} />
         <Route path="/search/category" element={<PriceCategorySearchPage />} />
       </Routes>
     </BrowserRouter>
