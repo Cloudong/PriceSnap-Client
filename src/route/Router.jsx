@@ -4,6 +4,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import MyPage from "../pages/MyPage";
 import PriceMainPage from "../pages/price/PriceMainPage";
+import PriceCategorySearchPage from "../pages/price/PriceCategorySearchPage";
 
 function Router() {
   return (
@@ -14,6 +15,7 @@ function Router() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/search" element={<PriceMainPage />} />
+        <Route path="/search/category" element={<PriceCategorySearchPage />} />
       </Routes>
     </BrowserRouter>
   );
