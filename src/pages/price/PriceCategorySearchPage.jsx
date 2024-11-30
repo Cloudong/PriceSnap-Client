@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import MainBar from "../../bar/MainBar";
 import Category from "../../components/price/Category";
+import Button from "../../components/Button";
 
 const Container = styled.div`
   width: calc(100%);
@@ -53,6 +54,7 @@ function PriceCategorySearchPage() {
       <Text className="title">상품 카테고리별 검색</Text>
       <Text className="sub">확인하고 싶은 카테고리를 클릭하세요</Text>
       <Category />
+      <Button className="yellow" title="카테고리 선택 완료" />
       <Wrapper>
         <Text className="type">전월 대비</Text>
         <Text className="type">평균</Text>

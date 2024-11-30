@@ -8,6 +8,7 @@ const CategoryContainer = styled.div`
   width: 100%;
   padding: 20px;
   padding-top: 70px;
+  padding-bottom: 40px;
 `;
 
 const CategoryWrapper = styled.div`
