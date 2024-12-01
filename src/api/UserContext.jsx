@@ -41,7 +41,7 @@ export const UserProvider = ({ children }) => {
             "Content-Type": "application/json",
           },
           credentials: "include",
-          body: JSON.stringify({ user_id, password }),
+          body: JSON.stringify({ userId: user_id, user_passsword: password }),
         }
       );
 
