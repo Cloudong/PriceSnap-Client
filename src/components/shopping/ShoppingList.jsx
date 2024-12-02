@@ -23,12 +23,16 @@ function ShoppingList() {
 
   const fetchShoppingList = async () => {
     try {
-      const response = await fetch("/api/shopping/list", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/carts",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
 
       if (!response.ok) {
         throw new Error("리스트 불러오기에 실패했습니다.");
@@ -59,18 +63,22 @@ function ShoppingList() {
 
   const handleSave = async () => {
     try {
-      const response = await fetch("/api/shopping/save", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          items: items.map((item, index) => ({
-            ...item,
-            order: index,
-          })),
-        }),
-      });
+      const response = await fetch(
+        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/carts/update",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            items: items.map((item, index) => ({
+              ...item,
+              order: index,
+            })),
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("저장에 실패했습니다.");

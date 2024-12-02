@@ -89,7 +89,7 @@ function LandingPage() {
   const handleAddToCart = async (item) => {
     try {
       const response = await fetch(
-        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/carts/items",
+        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/carts",
         {
           method: "POST",
           headers: {

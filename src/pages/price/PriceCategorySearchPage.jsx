@@ -101,6 +101,7 @@ function PriceCategorySearchPage() {
           searchResults.map((item) => (
             <PriceItem
               key={item.id}
+              id={item.id}
               name={item.name}
               current_week_price={item.current_week_price}
               previous_month_price={item.previous_month_price}

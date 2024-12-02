@@ -114,6 +114,7 @@ function PriceMainPage() {
           price.data.map((item) => (
             <PriceItem
               key={item.product_id}
+              id={item.id}
               name={item.product_name}
               current_week_price={item.current_week_price}
               previous_month_price={item.previous_month_price}

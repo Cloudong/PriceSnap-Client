@@ -107,15 +107,19 @@ function ShoppingBudget(props) {
     }
 
     try {
-      const response = await fetch("/api/shopping/budget", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          budget: parseInt(newBudget),
-        }),
-      });
+      const response = await fetch(
+        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/shopping/budgets",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            budget: parseInt(newBudget),
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("예산 설정에 실패했습니다.");
