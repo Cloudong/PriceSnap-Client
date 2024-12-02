@@ -54,7 +54,7 @@ function CurrentPriceItem(props) {
           {price_decline ? price_decline : "변동률"}
         </Text>
       </TextContainer>
-      <Button className="delete" title="추가" onClick={handler} />
+      <Button className="green" title="추가" onClick={handler} />
     </Container>
   );
 }

@@ -83,7 +83,7 @@ const UserContainer = styled.div`
 `;
 
 const ShoppingContainer = styled.div`
-  min-height: 180px;
+  min-height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -94,9 +94,11 @@ const ShoppingContainer = styled.div`
 const TrendContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  height: 120px;
+  align-items: center;
+  margin: 0 auto;
   gap: 20px;
   padding: 0 95px;
-  margin-top: 20px;
 `;
 
 function LandingPage() {
@@ -207,18 +209,18 @@ function LandingPage() {
                 장바구니 상품을 관리해보세요!
               </SubTitleText>
             </TextContainer>
-            <ShoppingContainer>
-              <ShoppingBudget hideButtons={true} />
-              <Wrapper>
-                <ShoppingList hideButtons={true} />
-              </Wrapper>
-            </ShoppingContainer>
             <Button
               title="장바구니 수정하기"
               className="yellow"
               onClick={() => navigate("/shopping")}
             />
           </UserContainer>
+          <ShoppingContainer>
+            <ShoppingBudget hideButtons={true} />
+            <Wrapper>
+              <ShoppingList hideButtons={true} />
+            </Wrapper>
+          </ShoppingContainer>
         </>
       ) : (
         <>
