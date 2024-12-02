@@ -4,6 +4,8 @@ import Button from "../components/Button";
 import MainBar from "../bar/MainBar";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../api/UserContext";
+import { useState, useEffect } from "react";
+import CurrentPriceItem from "../components/CurrentPriceItem";
 
 const Container = styled.div`
   width: calc(100%);
@@ -69,11 +71,78 @@ const UserContainer = styled.div`
   padding-top: 20px;
 `;
 
+const TrendContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0 95px;
+  margin-top: 20px;
+`;
+
 function LandingPage() {
+  const [trendItems, setTrendItems] = useState([]);
   const navigate = useNavigate();
   const { user } = useUser();
   const subtext =
     "계속 변동하는 물가에 맞게 생활하고 계신가요?\n합리적인 장바구니를 위해\nKU_PRICESNAP로 관리하세요.";
+
+  const handleAddToCart = async (item) => {
+    try {
+      const response = await fetch(
+        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/carts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            product_id: item.id,
+            quantity: 1,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        alert("장바구니에 추가되었습니다.");
+      } else {
+        const errorData = await response.json();
+        alert(errorData.message || "장바구니 추가에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("장바구니 추가 중 오류 발생:", error);
+      alert("장바구니 추가에 실패했습니다.");
+    }
+  };
+
+  useEffect(() => {
+    const fetchTrends = async () => {
+      if (!user) {
+        console.log("user not logged in");
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/products/trend",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+        const data = await response.json();
+        setTrendItems(data.data);
+      } catch (error) {
+        console.error("Error fetching trends:", error);
+      }
+    };
+
+    fetchTrends();
+  }, [user]);
+
   return (
     <Container>
       <MainBar />
@@ -100,6 +169,18 @@ function LandingPage() {
               }}
             />
           </UserContainer>
+          <TrendContainer>
+            {Array.isArray(trendItems) &&
+              trendItems.map((item) => (
+                <CurrentPriceItem
+                  key={item.id}
+                  product_name={item.name}
+                  current_month_price={item.current_month_price}
+                  price_decline={item.price_decline}
+                  handler={() => handleAddToCart(item)}
+                />
+              ))}
+          </TrendContainer>
           <UserContainer>
             <TextContainer className="sub">
               <TitleText>나의 장바구니</TitleText>

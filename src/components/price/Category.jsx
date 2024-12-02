@@ -43,14 +43,18 @@ const CategoryName = styled.span`
   color: ${(props) => (props.isSelected ? "#FFFFFF" : "#61646B")};
 `;
 
-const Category = () => {
+const Category = ({ onCategorySelect }) => {
   const [selectedItems, setSelectedItems] = useState({});
 
   const handleSelect = (depth, id) => {
-    setSelectedItems((prev) => ({
-      ...prev,
+    const newSelectedItems = {
+      ...selectedItems,
       [depth]: id,
-    }));
+    };
+    setSelectedItems(newSelectedItems);
+
+    const lastSelectedId = Object.values(newSelectedItems).pop();
+    onCategorySelect(lastSelectedId);
   };
 
   const renderCategories = () => {

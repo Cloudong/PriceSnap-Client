@@ -73,13 +73,43 @@ const CountButton = styled.button`
 
 function PriceItem(props) {
   const {
+    id,
     name,
     current_week_price,
     previous_month_price,
-    previous_week_price,
+    previous_two_months_price,
   } = props;
 
   const [count, setCount] = useState(1);
+
+  const handleAddToCart = async () => {
+    try {
+      const response = await fetch(
+        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/carts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            product_id: id,
+            quantity: count,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        alert("장바구니에 추가되었습니다.");
+      } else {
+        const errorData = await response.json();
+        alert(errorData.message || "장바구니 추가에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("장바구니 추가 중 오류 발생:", error);
+      alert("장바구니 추가에 실패했습니다.");
+    }
+  };
 
   const handleDecrement = () => {
     setCount((prev) => (prev > 1 ? prev - 1 : prev));
@@ -99,8 +129,8 @@ function PriceItem(props) {
         <Text className={`${getTextClassName(current_week_price)}`}>
           {current_week_price ? current_week_price : "null"}
         </Text>
-        <Text className={`${getTextClassName(previous_week_price)}`}>
-          {previous_week_price ? previous_week_price : "null"}
+        <Text className={`${getTextClassName(previous_two_months_price)}`}>
+          {previous_two_months_price ? previous_two_months_price : "null"}
         </Text>
       </TextContainer>
       <CountContainer>
@@ -110,7 +140,7 @@ function PriceItem(props) {
           +
         </CountButton>
       </CountContainer>
-      <Button className="green" title="추가" />
+      <Button className="green" title="추가" onClick={handleAddToCart} />
     </Container>
   );
 }
