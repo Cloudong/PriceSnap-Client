@@ -152,7 +152,11 @@ function LandingPage() {
             <SubTitleText>우리 가족 생활비를 위한</SubTitleText>
             <TitleText>물가 관리</TitleText>
             <SubText>{subtext}</SubText>
-            <Button className="yellow" title="KU_PRICESNAP 사용하러 가기" />
+            <Button
+              className="yellow"
+              title="KU_PRICESNAP 사용하러 가기"
+              onClick={navigate("/search")}
+            />
           </TextContainer>
           <UserContainer>
             <TextContainer className="sub">
@@ -188,7 +192,11 @@ function LandingPage() {
                 장바구니 상품을 관리해보세요!
               </SubTitleText>
             </TextContainer>
-            <Button title="장바구니 수정하기" className="yellow" />
+            <Button
+              title="장바구니 수정하기"
+              className="yellow"
+              onClick={navigate("/shopping")}
+            />
           </UserContainer>
         </>
       ) : (

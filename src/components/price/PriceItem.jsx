@@ -153,7 +153,7 @@ function PriceItem(props) {
         </CountButton>
       </CountContainer>
       <Button
-        classproduct_Name="green"
+        className="green"
         title="추가"
         onClick={handleAddToCart}
       />

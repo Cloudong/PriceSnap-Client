@@ -15,6 +15,13 @@ const Container = styled.div`
   text-align: center;
 `;
 
+const PriceWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -109,7 +116,7 @@ function PriceMainPage() {
         <Text className="type">평균</Text>
         <Text className="type">전전월 대비</Text>
       </Wrapper>
-      <Wrapper>
+      <PriceWrapper>
         {Array.isArray(price.products) &&
           price.products.map((item) => (
             <PriceItem
@@ -121,7 +128,7 @@ function PriceMainPage() {
               previous_two_months_price={item.previous_two_months_price}
             />
           ))}
-      </Wrapper>
+      </PriceWrapper>
     </Container>
   );
 }

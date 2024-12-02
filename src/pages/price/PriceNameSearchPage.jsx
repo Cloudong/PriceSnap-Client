@@ -23,6 +23,13 @@ const Wrapper = styled.div`
   gap: 50px;
 `;
 
+const PriceWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Text = styled.div`
   font-family: "Inter", sans-serif;
   white-space: pre-wrap;
@@ -80,7 +87,7 @@ function PriceNameSearchPage() {
         <Text className="type">평균</Text>
         <Text className="type">전전월 대비</Text>
       </Wrapper>
-      <Wrapper>
+      <PriceWrapper>
         {Array.isArray(searchResults.products) &&
           searchResults.products.map((item) => (
             <PriceItem
@@ -92,7 +99,7 @@ function PriceNameSearchPage() {
               previous_two_months_price={item.previous_two_months_price}
             />
           ))}
-      </Wrapper>
+      </PriceWrapper>
     </Container>
   );
 }
