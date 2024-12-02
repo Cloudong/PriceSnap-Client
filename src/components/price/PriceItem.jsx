@@ -16,8 +16,10 @@ const Container = styled.div`
 `;
 
 const TextContainer = styled.div`
+  width: 350px;
   display: flex;
   text-align: center;
+  align-items: center;
   gap: 70px;
 `;
 

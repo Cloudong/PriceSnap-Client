@@ -19,8 +19,8 @@ const PriceWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 80px;
-  gap: 15px;
+  padding-top: 60px;
+  gap: 20px;
 `;
 
 const Wrapper = styled.div`

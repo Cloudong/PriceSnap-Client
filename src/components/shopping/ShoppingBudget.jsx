@@ -108,7 +108,7 @@ function ShoppingBudget(props) {
 
     try {
       const response = await fetch(
-        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/shopping/budgets",
+        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/budgets",
         {
           method: "POST",
           headers: {

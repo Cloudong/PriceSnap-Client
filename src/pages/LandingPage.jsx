@@ -6,11 +6,22 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../api/UserContext";
 import { useState, useEffect } from "react";
 import CurrentPriceItem from "../components/price/CurrentPriceItem";
+import ShoppingBudget from "../components/shopping/ShoppingBudget";
+import ShoppingList from "../components/shopping/ShoppingList";
 
 const Container = styled.div`
   width: calc(100%);
   display: flex;
   flex-direction: column;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 50px;
 `;
 
 const TextContainer = styled.div`
@@ -68,7 +79,7 @@ const UserContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding-right: 95px;
-  padding-top: 20px;
+  padding-top: 40px;
 `;
 
 const TrendContainer = styled.div`
@@ -149,7 +160,7 @@ function LandingPage() {
       {user ? (
         <>
           <TextContainer className="main">
-            <SubTitleText>`${user.name}`님 안녕하세요</SubTitleText>
+            <SubTitleText>{`${user.name}님 안녕하세요`}</SubTitleText>
             <TitleText>우리 가족 생활비를 위한 물가 관리</TitleText>
             <SubText>{subtext}</SubText>
           </TextContainer>
@@ -187,6 +198,10 @@ function LandingPage() {
                 장바구니 상품을 관리해보세요!
               </SubTitleText>
             </TextContainer>
+            <ShoppingBudget />
+            <Wrapper>
+              <ShoppingList />
+            </Wrapper>
             <Button
               title="장바구니 수정하기"
               className="yellow"
