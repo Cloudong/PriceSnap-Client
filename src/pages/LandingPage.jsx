@@ -26,7 +26,6 @@ const Wrapper = styled.div`
 
 const TextContainer = styled.div`
   display: flex;
-  height: 663px;
   color: #432a00;
   flex-direction: column;
 
