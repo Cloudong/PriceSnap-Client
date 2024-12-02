@@ -110,8 +110,8 @@ function PriceMainPage() {
         <Text className="type">전전월 대비</Text>
       </Wrapper>
       <Wrapper>
-        {Array.isArray(price.data) &&
-          price.data.map((item) => (
+        {Array.isArray(price.products) &&
+          price.products.map((item) => (
             <PriceItem
               key={item.product_id}
               id={item.id}

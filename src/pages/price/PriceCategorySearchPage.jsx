@@ -97,8 +97,8 @@ function PriceCategorySearchPage() {
         <Text className="type">전전월 대비</Text>
       </Wrapper>
       <Wrapper>
-        {Array.isArray(searchResults) &&
-          searchResults.map((item) => (
+        {Array.isArray(searchResults.products) &&
+          searchResults.products.map((item) => (
             <PriceItem
               key={item.product_id}
               id={item.product_id}
