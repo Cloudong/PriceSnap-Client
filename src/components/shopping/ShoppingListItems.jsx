@@ -62,7 +62,7 @@ const Text = styled.div`
   }
 `;
 
-function ShoppingListItems({ items, onDelete }) {
+function ShoppingListItems({ items, onDelete, hideButtons }) {
   if (items.length === 0) {
     return (
       <TextContainer>
@@ -92,6 +92,7 @@ function ShoppingListItems({ items, onDelete }) {
                     price={item.price}
                     num={item.num}
                     handler={() => onDelete(index)}
+                    hideButtons={hideButtons}
                   />
                 </DraggableItem>
               )}

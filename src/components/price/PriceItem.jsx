@@ -5,7 +5,7 @@ import Button from "../Button";
 const Container = styled.div`
   width: 809px;
   height: 60px;
-  padding-left: 110px;
+  padding-left: 80px;
   padding-right: 10px;
   display: flex;
   flex-direction: row;
@@ -28,7 +28,7 @@ const Text = styled.div`
   white-space: pre-wrap;
 
   &.title {
-    width: 100px;
+    width: 120px;
     font-size: 24px;
     font-weight: 700;
     text-align: left;

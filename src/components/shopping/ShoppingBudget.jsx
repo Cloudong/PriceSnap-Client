@@ -94,7 +94,7 @@ const BudgetInput = styled.input`
   }
 `;
 
-function ShoppingBudget({ budget, present, readOnly }) {
+function ShoppingBudget({ budget, present, hideButtons }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newBudget, setNewBudget] = useState("");
   const state = budget - present;
@@ -169,7 +169,7 @@ function ShoppingBudget({ budget, present, readOnly }) {
         <FiDollarSign color="#daa520" size={32} />
         <Text className="budget">예산</Text>
         <Text className="money">{`${budget}`}₩</Text>
-        {!readOnly && (
+        {!hideButtons && (
           <Button
             title="수정"
             className="green"

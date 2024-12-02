@@ -88,7 +88,7 @@ const ShoppingContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   padding-right: 95px;
-  padding-top: 20px;
+  padding-top: 40px;
 `;
 
 const TrendContainer = styled.div`
@@ -208,9 +208,9 @@ function LandingPage() {
               </SubTitleText>
             </TextContainer>
             <ShoppingContainer>
-              <ShoppingBudget readOnly={true} />
+              <ShoppingBudget hideButtons={true} />
               <Wrapper>
-                <ShoppingList readOnly={true} />
+                <ShoppingList hideButtons={true} />
               </Wrapper>
             </ShoppingContainer>
             <Button
