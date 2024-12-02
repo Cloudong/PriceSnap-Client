@@ -49,7 +49,7 @@ function ShoppingItem(props) {
         <Text className="sub">{price ? price : "상품 가격"}</Text>
         <Text className="dosage">{num ? num : "담은 개수"}</Text>
       </TextContainer>
-      <Button className="red" title="삭제" onClick={handler} />
+      <Button className="delete" title="삭제" onClick={handler} />
     </Container>
   );
 }
