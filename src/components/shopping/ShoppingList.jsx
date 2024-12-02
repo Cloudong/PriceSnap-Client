@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { DragDropContext } from "@hello-pangea/dnd";
 import styled from "styled-components";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import ShoppingItem from "./ShoppingItem";
+import ShoppingListItems from "./ShoppingListItems";
+import ShoppingListButtons from "./ShoppingListButtons";
 
 const ListContainer = styled.div`
   width: 100%;
@@ -10,52 +12,38 @@ const ListContainer = styled.div`
   padding: 20px;
 `;
 
-const ItemList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-const DraggableItem = styled.div.attrs((props) => ({
-  style: {
-    background: props.$isDragging ? "#f5f5f5" : "white",
-    transition: "all 0.2s ease",
-  },
-}))`
-  display: flex;
-  align-items: center;
-  border-radius: 8px;
-`;
-
-const DragHandle = styled.div`
-  width: 20px;
-  height: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0 10px;
-  cursor: grab;
-  color: #888;
-
-  &::before,
-  &::after {
-    content: "•••";
-    font-size: 14px;
-    line-height: 4px;
-  }
-`;
-
 function ShoppingList() {
-  const [items, setItems] = useState([
-    { id: "item-1", name: "타이레놀", price: "5,000원", num: "2개" },
-    { id: "item-2", name: "후시딘", price: "8,000원", num: "1개" },
-    { id: "item-3", name: "게보린", price: "3,000원", num: "3개" },
-    { id: "item-4", name: "비타민C", price: "15,000원", num: "1개" },
-    { id: "item-5", name: "파스", price: "4,500원", num: "2개" },
-  ]);
+  const navigate = useNavigate();
+  const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const onDragEnd = (result) => {
+  useEffect(() => {
+    fetchShoppingList();
+  }, []);
+
+  const fetchShoppingList = async () => {
+    try {
+      const response = await fetch("/api/shopping/list", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("리스트 불러오기에 실패했습니다.");
+      }
+
+      const data = await response.json();
+      setItems(data.items || []);
+    } catch (error) {
+      console.error("리스트 불러오기 실패:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDragEnd = (result) => {
     if (!result.destination) return;
 
     const reorderedItems = Array.from(items);
@@ -69,37 +57,57 @@ function ShoppingList() {
     setItems(items.filter((_, idx) => idx !== index));
   };
 
+  const handleSave = async () => {
+    try {
+      const response = await fetch("/api/shopping/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          items: items.map((item, index) => ({
+            ...item,
+            order: index,
+          })),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("저장에 실패했습니다.");
+      }
+
+      alert("장바구니가 저장되었습니다.");
+    } catch (error) {
+      console.error("저장 실패:", error);
+      alert("저장에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const handleAddNew = () => {
+    navigate("/search");
+  };
+
+  const handleDeleteLowest = () => {
+    if (items.length === 0) {
+      alert("삭제할 상품이 없습니다.");
+      return;
+    }
+    setItems((prevItems) => prevItems.slice(0, -1));
+  };
+
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={handleDragEnd}>
       <ListContainer>
-        <Droppable droppableId="droppable">
-          {(provided) => (
-            <ItemList {...provided.droppableProps} ref={provided.innerRef}>
-              {items.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided, snapshot) => (
-                    <DraggableItem
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      $isDragging={snapshot.isDragging}
-                    >
-                      <div {...provided.dragHandleProps}>
-                        <DragHandle />
-                      </div>
-                      <ShoppingItem
-                        name={item.name}
-                        price={item.price}
-                        num={item.num}
-                        handler={() => handleDelete(index)}
-                      />
-                    </DraggableItem>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </ItemList>
-          )}
-        </Droppable>
+        <ShoppingListItems items={items} onDelete={handleDelete} />
+        <ShoppingListButtons
+          onSave={handleSave}
+          onAddNew={handleAddNew}
+          onDeleteLowest={handleDeleteLowest}
+        />
       </ListContainer>
     </DragDropContext>
   );
