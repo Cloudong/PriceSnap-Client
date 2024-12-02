@@ -38,12 +38,12 @@ function MyPage() {
       const response = await fetch(
         "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/users/update-name",
         {
-          method: "POST",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
           credentials: "include",
-          body: JSON.stringify({ new_name: name }),
+          body: JSON.stringify({ newName: name }),
         }
       );
 
