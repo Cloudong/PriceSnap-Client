@@ -4,7 +4,6 @@ import Button from "../Button";
 
 const Container = styled.div`
   width: 170px;
-  height: 70px;
   padding: 10px 0;
   display: flex;
   justify-content: space-between;

@@ -36,6 +36,7 @@ const TextContainer = styled.div`
     padding-right: 95px;
     align-items: flex-end;
     justify-content: center;
+    height: 663px;
   }
 
   &.sub {
