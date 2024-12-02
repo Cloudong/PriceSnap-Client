@@ -36,8 +36,10 @@ function LoginPage() {
     e.preventDefault();
     try {
       await login(id, password);
-      navigate("/");
-    } catch (err) {}
+      navigate("/", { replace: true });
+    } catch (err) {
+      console.error("로그인 실패:", err);
+    }
   };
 
   return (

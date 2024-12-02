@@ -149,14 +149,9 @@ function LandingPage() {
       {user ? (
         <>
           <TextContainer className="main">
-            <SubTitleText>우리 가족 생활비를 위한</SubTitleText>
-            <TitleText>물가 관리</TitleText>
+            <SubTitleText>`${user.name}`님 안녕하세요</SubTitleText>
+            <TitleText>우리 가족 생활비를 위한 물가 관리</TitleText>
             <SubText>{subtext}</SubText>
-            <Button
-              className="yellow"
-              title="KU_PRICESNAP 사용하러 가기"
-              onClick={navigate("/search")}
-            />
           </TextContainer>
           <UserContainer>
             <TextContainer className="sub">
@@ -195,7 +190,7 @@ function LandingPage() {
             <Button
               title="장바구니 수정하기"
               className="yellow"
-              onClick={navigate("/shopping")}
+              onClick={() => navigate("/shopping")}
             />
           </UserContainer>
         </>
@@ -205,7 +200,11 @@ function LandingPage() {
             <SubTitleText>우리 가족 생활비를 위한</SubTitleText>
             <TitleText>물가 관리</TitleText>
             <SubText>{subtext}</SubText>
-            <Button className="yellow" title="KU_PRICESNAP 사용하러 가기" />
+            <Button
+              className="yellow"
+              title="KU_PRICESNAP 사용하러 가기"
+              onClick={() => navigate("/login")}
+            />
           </TextContainer>
         </>
       )}
