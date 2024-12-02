@@ -72,22 +72,22 @@ function PriceNameSearchPage() {
   return (
     <Container>
       <MainBar />
-      <Text className="title">상품 카테고리별 검색</Text>
-      <Text className="sub">확인하고 싶은 카테고리를 클릭하세요</Text>
+      <Text className="title">상품 이름별 검색</Text>
+      <Text className="sub">확인하고 싶은 상품 이름을 클릭하세요</Text>
       <Search onSearch={handleSearch} />
       <Wrapper>
         <Text className="type">전월 대비</Text>
         <Text className="type">평균</Text>
-        <Text className="type">전주 대비</Text>
+        <Text className="type">전전월 대비</Text>
       </Wrapper>
       <Wrapper>
         {Array.isArray(searchResults) &&
           searchResults.map((item) => (
             <PriceItem
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              current_week_price={item.current_week_price}
+              key={item.product_id}
+              product_id={item.product_id}
+              product_name={item.product_name}
+              current_month_price={item.current_month_price}
               previous_month_price={item.previous_month_price}
               previous_two_months_price={item.previous_two_months_price}
             />

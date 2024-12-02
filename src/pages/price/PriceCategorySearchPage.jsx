@@ -94,16 +94,16 @@ function PriceCategorySearchPage() {
       <Wrapper>
         <Text className="type">전월 대비</Text>
         <Text className="type">평균</Text>
-        <Text className="type">전주 대비</Text>
+        <Text className="type">전전월 대비</Text>
       </Wrapper>
       <Wrapper>
         {Array.isArray(searchResults) &&
           searchResults.map((item) => (
             <PriceItem
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              current_week_price={item.current_week_price}
+              key={item.product_id}
+              id={item.product_id}
+              name={item.product_name}
+              current_month_price={item.current_month_price}
               previous_month_price={item.previous_month_price}
               previous_two_months_price={item.previous_two_months_price}
             />

@@ -73,9 +73,9 @@ const CountButton = styled.button`
 
 function PriceItem(props) {
   const {
-    id,
-    name,
-    current_week_price,
+    product_id,
+    product_name,
+    current_month_price,
     previous_month_price,
     previous_two_months_price,
   } = props;
@@ -93,7 +93,7 @@ function PriceItem(props) {
           },
           credentials: "include",
           body: JSON.stringify({
-            product_id: id,
+            product_id: product_id,
             quantity: count,
           }),
         }
@@ -115,32 +115,48 @@ function PriceItem(props) {
     setCount((prev) => (prev > 1 ? prev - 1 : prev));
   };
 
-  const getTextClassName = (price) => {
+  const getTextClassproduct_Name = (price) => {
     return price > 0 ? "increment" : "decrement";
   };
 
   return (
     <Container>
-      <Text className="title">{name ? name : "상품 이름"}</Text>
+      <Text classproduct_Name="title">
+        {product_name ? product_name : "상품 이름"}
+      </Text>
       <TextContainer>
-        <Text className={`${getTextClassName(previous_month_price)}`}>
+        <Text
+          classproduct_Name={`${getTextClassproduct_Name(
+            previous_month_price
+          )}`}
+        >
           {previous_month_price ? previous_month_price : "null"}
         </Text>
-        <Text className={`${getTextClassName(current_week_price)}`}>
-          {current_week_price ? current_week_price : "null"}
+        <Text
+          classproduct_Name={`${getTextClassproduct_Name(current_month_price)}`}
+        >
+          {current_month_price ? current_month_price : "null"}
         </Text>
-        <Text className={`${getTextClassName(previous_two_months_price)}`}>
+        <Text
+          classproduct_Name={`${getTextClassproduct_Name(
+            previous_two_months_price
+          )}`}
+        >
           {previous_two_months_price ? previous_two_months_price : "null"}
         </Text>
       </TextContainer>
       <CountContainer>
         <CountButton onClick={handleDecrement}>-</CountButton>
-        <Text className="count">{count}</Text>
+        <Text classproduct_Name="count">{count}</Text>
         <CountButton onClick={() => setCount((prev) => prev + 1)}>
           +
         </CountButton>
       </CountContainer>
-      <Button className="green" title="추가" onClick={handleAddToCart} />
+      <Button
+        classproduct_Name="green"
+        title="추가"
+        onClick={handleAddToCart}
+      />
     </Container>
   );
 }
