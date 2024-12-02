@@ -13,6 +13,15 @@ const Container = styled.div`
   text-align: center;
 `;
 
+const PriceWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
+  gap: 10px;
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -21,13 +30,6 @@ const Wrapper = styled.div`
   text-align: center;
   padding-top: 80px;
   gap: 50px;
-`;
-
-const PriceWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Text = styled.div`

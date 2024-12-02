@@ -121,42 +121,28 @@ function PriceItem(props) {
 
   return (
     <Container>
-      <Text classproduct_Name="title">
-        {product_name ? product_name : "상품 이름"}
-      </Text>
+      <Text className="title">{product_name ? product_name : "상품 이름"}</Text>
       <TextContainer>
-        <Text
-          classproduct_Name={`${getTextClassproduct_Name(
-            previous_month_price
-          )}`}
-        >
+        <Text className={`${getTextClassproduct_Name(previous_month_price)}`}>
           {previous_month_price ? previous_month_price : "null"}
         </Text>
-        <Text
-          classproduct_Name={`${getTextClassproduct_Name(current_month_price)}`}
-        >
+        <Text className={`${getTextClassproduct_Name(current_month_price)}`}>
           {current_month_price ? current_month_price : "null"}
         </Text>
         <Text
-          classproduct_Name={`${getTextClassproduct_Name(
-            previous_two_months_price
-          )}`}
+          className={`${getTextClassproduct_Name(previous_two_months_price)}`}
         >
           {previous_two_months_price ? previous_two_months_price : "null"}
         </Text>
       </TextContainer>
       <CountContainer>
         <CountButton onClick={handleDecrement}>-</CountButton>
-        <Text classproduct_Name="count">{count}</Text>
+        <Text className="count">{count}</Text>
         <CountButton onClick={() => setCount((prev) => prev + 1)}>
           +
         </CountButton>
       </CountContainer>
-      <Button
-        className="green"
-        title="추가"
-        onClick={handleAddToCart}
-      />
+      <Button className="green" title="추가" onClick={handleAddToCart} />
     </Container>
   );
 }

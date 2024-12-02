@@ -19,6 +19,8 @@ const PriceWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 80px;
+  gap: 10px;
 `;
 
 const Wrapper = styled.div`
@@ -108,8 +110,8 @@ function PriceCategorySearchPage() {
           searchResults.products.map((item) => (
             <PriceItem
               key={item.product_id}
-              id={item.product_id}
-              name={item.product_name}
+              product_id={item.product_id}
+              product_name={item.product_name}
               current_month_price={item.current_month_price}
               previous_month_price={item.previous_month_price}
               previous_two_months_price={item.previous_two_months_price}
