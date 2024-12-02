@@ -4,7 +4,7 @@ import { FiDollarSign } from "react-icons/fi";
 import Button from "../Button";
 
 const Container = styled.div`
-  width: 520px;
+  width: 100%;
   height: 180px;
   padding: 10px;
   display: flex;
@@ -132,7 +132,7 @@ function ShoppingBudget({ budget, present, hideButtons }) {
     }
   };
 
-  if (budget == null) {
+  if (budget == null && !hideButtons) {
     return (
       <>
         {isEditing ? (

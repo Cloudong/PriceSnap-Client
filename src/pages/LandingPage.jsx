@@ -189,11 +189,11 @@ function LandingPage() {
             />
           </UserContainer>
           <TrendContainer>
-            {Array.isArray(trendItems) &&
+            {Array.isArray(trendItems.trend) &&
               trendItems.map((item) => (
                 <CurrentPriceItem
-                  key={item.id}
-                  product_name={item.name}
+                  key={item.product_id}
+                  product_name={item.product_name}
                   current_month_price={item.current_month_price}
                   price_decline={item.price_decline}
                   handler={() => handleAddToCart(item)}
