@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import MainBar from "../../bar/MainBar";
 import Search from "../../components/price/Search";
+import PriceItem from "../../components/price/PriceItem";
 
 const Container = styled.div`
   width: calc(100%);
@@ -47,16 +48,49 @@ const Text = styled.div`
 `;
 
 function PriceNameSearchPage() {
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = async (name) => {
+    try {
+      const response = await fetch(
+        `https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/products/search/name?name=${name}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+      const data = await response.json();
+      setSearchResults(data.data);
+    } catch (error) {
+      console.error("검색 중 오류 발생:", error);
+    }
+  };
+
   return (
     <Container>
       <MainBar />
       <Text className="title">상품 카테고리별 검색</Text>
       <Text className="sub">확인하고 싶은 카테고리를 클릭하세요</Text>
-      <Search handleSearch={() => {}} />
+      <Search onSearch={handleSearch} />
       <Wrapper>
         <Text className="type">전월 대비</Text>
         <Text className="type">평균</Text>
         <Text className="type">전주 대비</Text>
+      </Wrapper>
+      <Wrapper>
+        {Array.isArray(searchResults) &&
+          searchResults.map((item) => (
+            <PriceItem
+              key={item.id}
+              name={item.name}
+              current_week_price={item.current_week_price}
+              previous_month_price={item.previous_month_price}
+              previous_two_months_price={item.previous_two_months_price}
+            />
+          ))}
       </Wrapper>
     </Container>
   );

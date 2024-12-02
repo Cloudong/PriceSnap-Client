@@ -27,20 +27,30 @@ const InputField = styled.input`
   }
 `;
 
-function Search(props) {
-  const { handleSearch } = props;
-  const [search, setSearch] = useState("");
+function Search({ onSearch }) {
+  const [name, setName] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearch(name);
+  };
 
   return (
-    <InputContainer>
-      <InputField
-        label="검색창"
-        value={search}
-        placeholder="약 이름을 입력해주세요"
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <FiSearch size="48" onClick={handleSearch} />
-    </InputContainer>
+    <form onSubmit={handleSubmit}>
+      <InputContainer>
+        <InputField
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="검색어를 입력하세요"
+        />
+        <FiSearch
+          style={{ cursor: "pointer" }}
+          onClick={handleSubmit}
+          size={24}
+        />
+      </InputContainer>
+    </form>
   );
 }
 

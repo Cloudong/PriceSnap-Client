@@ -76,7 +76,7 @@ function PriceItem(props) {
     name,
     current_week_price,
     previous_month_price,
-    previous_week_price,
+    previous_two_months_price,
   } = props;
 
   const [count, setCount] = useState(1);
@@ -99,8 +99,8 @@ function PriceItem(props) {
         <Text className={`${getTextClassName(current_week_price)}`}>
           {current_week_price ? current_week_price : "null"}
         </Text>
-        <Text className={`${getTextClassName(previous_week_price)}`}>
-          {previous_week_price ? previous_week_price : "null"}
+        <Text className={`${getTextClassName(previous_two_months_price)}`}>
+          {previous_two_months_price ? previous_two_months_price : "null"}
         </Text>
       </TextContainer>
       <CountContainer>

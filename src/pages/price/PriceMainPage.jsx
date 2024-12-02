@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import MainBar from "../../bar/MainBar";
+import { useUser } from "../../api/UserContext";
+import PriceItem from "../../components/price/PriceItem";
 
 const Container = styled.div`
   width: calc(100%);
@@ -48,7 +50,39 @@ const Text = styled.div`
 `;
 
 function PriceMainPage() {
+  const [price, setPrice] = useState([]);
   const navigate = useNavigate();
+  const user = useUser();
+
+  useEffect(() => {
+    const fetchPrice = async () => {
+      if (!user) {
+        console.log("user not logged in");
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/products/search",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+        const data = await response.json();
+        setPrice(data);
+        console.log("success on fetch price");
+      } catch (error) {
+        console.error("Error fetching details:", error);
+      }
+    };
+
+    fetchPrice();
+  }, [user]);
+
   return (
     <Container>
       <MainBar />
@@ -73,7 +107,19 @@ function PriceMainPage() {
       <Wrapper>
         <Text className="type">전월 대비</Text>
         <Text className="type">평균</Text>
-        <Text className="type">전주 대비</Text>
+        <Text className="type">전전월 대비</Text>
+      </Wrapper>
+      <Wrapper>
+        {Array.isArray(price.data) &&
+          price.data.map((item) => (
+            <PriceItem
+              key={item.product_id}
+              name={item.product_name}
+              current_week_price={item.current_week_price}
+              previous_month_price={item.previous_month_price}
+              previous_two_months_price={item.previous_two_months_price}
+            />
+          ))}
       </Wrapper>
     </Container>
   );
