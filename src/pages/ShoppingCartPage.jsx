@@ -53,9 +53,9 @@ function ShoppingCartPage() {
       <MainBar />
       <Text className="title">장바구니 관리</Text>
       <Text className="sub">수정하고 싶은 상품을 선택하세요</Text>
-      <ShoppingBudget />
+      <ShoppingBudget readOnly={false} />
       <Wrapper>
-        <ShoppingList />
+        <ShoppingList readOnly={false} />
       </Wrapper>
     </Container>
   );

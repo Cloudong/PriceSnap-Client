@@ -82,6 +82,15 @@ const UserContainer = styled.div`
   padding-top: 40px;
 `;
 
+const ShoppingContainer = styled.div`
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 95px;
+  padding-top: 20px;
+`;
+
 const TrendContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -198,10 +207,12 @@ function LandingPage() {
                 장바구니 상품을 관리해보세요!
               </SubTitleText>
             </TextContainer>
-            <ShoppingBudget />
-            <Wrapper>
-              <ShoppingList />
-            </Wrapper>
+            <ShoppingContainer>
+              <ShoppingBudget readOnly={true} />
+              <Wrapper>
+                <ShoppingList readOnly={true} />
+              </Wrapper>
+            </ShoppingContainer>
             <Button
               title="장바구니 수정하기"
               className="yellow"

@@ -28,33 +28,33 @@ const Text = styled.div`
   white-space: pre-wrap;
 
   &.title {
-    width: max-content;
+    width: 100px;
     font-size: 24px;
     font-weight: 700;
     text-align: left;
   }
 
   &.increment {
-    width: max-content;
+    width: 100px;
     font-size: 20px;
     font-weight: 800;
     color: #8fa86a;
   }
 
   &.decrement {
-    width: max-content;
+    width: 100px;
     font-size: 20px;
     font-weight: 800;
     color: #d53d3d;
   }
 
   &.count {
+    width: 30px;
     color: #000;
     text-align: center;
     font-size: 20px;
     font-weight: 400;
     border: 0.8px solid #000;
-    min-width: 28px;
   }
 `;
 

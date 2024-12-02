@@ -12,7 +12,7 @@ const ListContainer = styled.div`
   padding: 20px;
 `;
 
-function ShoppingList() {
+function ShoppingList({ readOnly }) {
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -110,11 +110,14 @@ function ShoppingList() {
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <ListContainer>
-        <ShoppingListItems items={items} onDelete={handleDelete} />
+        <ShoppingListItems
+          items={items}
+          onDelete={readOnly ? null : handleDelete}
+        />
         <ShoppingListButtons
-          onSave={handleSave}
-          onAddNew={handleAddNew}
-          onDeleteLowest={handleDeleteLowest}
+          onSave={readOnly ? null : handleSave}
+          onAddNew={readOnly ? null : handleAddNew}
+          onDeleteLowest={readOnly ? null : handleDeleteLowest}
         />
       </ListContainer>
     </DragDropContext>
