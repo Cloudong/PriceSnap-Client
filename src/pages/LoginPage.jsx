@@ -58,7 +58,7 @@ function LoginPage() {
           placeholder="비밀번호를 입력해주세요"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button title="로그인" className="yellow" />
+        <Button title="로그인" className="yellow" onClick={handleLogin} />
       </LoginForm>
     </Container>
   );
