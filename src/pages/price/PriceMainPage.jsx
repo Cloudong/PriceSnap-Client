@@ -125,7 +125,7 @@ function PriceMainPage() {
               key={item.product_id}
               product_id={item.product_id}
               product_name={item.product_name}
-              current_week_price={item.current_week_price}
+              current_month_price={item.current_month_price}
               previous_month_price={item.previous_month_price}
               previous_two_months_price={item.previous_two_months_price}
             />

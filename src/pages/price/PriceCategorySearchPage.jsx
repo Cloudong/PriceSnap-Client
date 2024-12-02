@@ -83,7 +83,7 @@ function PriceCategorySearchPage() {
         }
       );
       const data = await response.json();
-      setSearchResults(data.data);
+      setSearchResults(data);
     } catch (error) {
       console.error("카테고리 검색 중 오류 발생:", error);
     }

@@ -17,7 +17,7 @@ const Container = styled.div`
 
 const TextContainer = styled.div`
   display: flex;
-  text-align: left;
+  text-align: center;
   gap: 70px;
 `;
 
@@ -26,17 +26,21 @@ const Text = styled.div`
   white-space: pre-wrap;
 
   &.title {
+    min-width: max-content;
     font-size: 24px;
     font-weight: 700;
+    text-align: left;
   }
 
   &.increment {
+    min-width: max-content;
     font-size: 20px;
     font-weight: 800;
     color: #8fa86a;
   }
 
   &.decrement {
+    min-width: max-content;
     font-size: 20px;
     font-weight: 800;
     color: #d53d3d;
