@@ -117,7 +117,7 @@ function LandingPage() {
           },
           credentials: "include",
           body: JSON.stringify({
-            product_id: item.id,
+            product_id: item.product_id,
             quantity: 1,
           }),
         }
@@ -154,7 +154,7 @@ function LandingPage() {
           }
         );
         const data = await response.json();
-        setTrendItems(data.data);
+        setTrendItems(data.trend);
       } catch (error) {
         console.error("Error fetching trends:", error);
       }
@@ -189,7 +189,7 @@ function LandingPage() {
             />
           </UserContainer>
           <TrendContainer>
-            {Array.isArray(trendItems.trend) &&
+            {Array.isArray(trendItems) &&
               trendItems.map((item) => (
                 <CurrentPriceItem
                   key={item.product_id}
