@@ -26,21 +26,21 @@ const Text = styled.div`
   white-space: pre-wrap;
 
   &.title {
-    min-width: max-content;
+    width: max-content;
     font-size: 24px;
     font-weight: 700;
     text-align: left;
   }
 
   &.increment {
-    min-width: max-content;
+    width: max-content;
     font-size: 20px;
     font-weight: 800;
     color: #8fa86a;
   }
 
   &.decrement {
-    min-width: max-content;
+    width: max-content;
     font-size: 20px;
     font-weight: 800;
     color: #d53d3d;

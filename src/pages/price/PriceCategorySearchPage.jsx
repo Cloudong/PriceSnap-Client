@@ -20,7 +20,7 @@ const PriceWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 80px;
-  gap: 10px;
+  gap: 15px;
 `;
 
 const Wrapper = styled.div`
