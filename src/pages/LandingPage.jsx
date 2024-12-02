@@ -5,7 +5,7 @@ import MainBar from "../bar/MainBar";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../api/UserContext";
 import { useState, useEffect } from "react";
-import CurrentPriceItem from "../components/CurrentPriceItem";
+import CurrentPriceItem from "../components/price/CurrentPriceItem";
 
 const Container = styled.div`
   width: calc(100%);
