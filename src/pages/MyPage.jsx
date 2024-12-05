@@ -28,7 +28,7 @@ const MyPageForm = styled.form`
 
 function MyPage() {
   const [name, setName] = useState("");
-  const { user, logout } = useUser();
+  const { logout, token } = useUser();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -41,9 +41,11 @@ function MyPage() {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ newName: name }),
+          body: JSON.stringify({
+            newName: name,
+          }),
         }
       );
 
@@ -51,8 +53,6 @@ function MyPage() {
         const errorData = await response.json();
         throw new Error(errorData.message);
       }
-      navigate("/");
-      window.location.reload();
       console.log("닉네임 수정 성공");
     } catch (err) {
       console.log("닉네임 수정 실패");
@@ -70,7 +70,13 @@ function MyPage() {
           placeholder="닉네임을 입력해주세요"
           onChange={(e) => setName(e.target.value)}
         />
-        <Button title="프로필 수정 완료" className="brown" />
+        <Button
+          title="프로필 수정 완료"
+          className="brown"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
         <Button
           title="로그아웃"
           onClick={() => {

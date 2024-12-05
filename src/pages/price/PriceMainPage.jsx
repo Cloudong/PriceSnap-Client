@@ -61,7 +61,7 @@ const Text = styled.div`
 function PriceMainPage() {
   const [price, setPrice] = useState([]);
   const navigate = useNavigate();
-  const user = useUser();
+  const { user, token } = useUser();
 
   useEffect(() => {
     const fetchPrice = async () => {
@@ -77,7 +77,7 @@ function PriceMainPage() {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
@@ -90,7 +90,7 @@ function PriceMainPage() {
     };
 
     fetchPrice();
-  }, [user]);
+  }, [user, token]);
 
   return (
     <Container>

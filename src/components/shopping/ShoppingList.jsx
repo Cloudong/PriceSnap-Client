@@ -17,7 +17,7 @@ function ShoppingList({ hideButtons }) {
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const user = useUser();
+  const token = useUser();
 
   useEffect(() => {
     const fetchShoppingList = async () => {
@@ -28,7 +28,7 @@ function ShoppingList({ hideButtons }) {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
@@ -47,7 +47,7 @@ function ShoppingList({ hideButtons }) {
     };
 
     fetchShoppingList();
-  }, [user.token]);
+  }, [token]);
 
   const handleDragEnd = (result) => {
     if (!result.destination) return;
@@ -71,7 +71,7 @@ function ShoppingList({ hideButtons }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
           },
           credentials: "include",
           body: JSON.stringify({

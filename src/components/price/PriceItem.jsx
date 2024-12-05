@@ -88,7 +88,7 @@ function PriceItem(props) {
   } = props;
 
   const [count, setCount] = useState(1);
-  const user = useUser();
+  const token = useUser();
 
   const handleAddToCart = async () => {
     try {
@@ -98,7 +98,7 @@ function PriceItem(props) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             product_id: product_id,

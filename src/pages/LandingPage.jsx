@@ -104,7 +104,7 @@ const TrendContainer = styled.div`
 function LandingPage() {
   const [trendItems, setTrendItems] = useState([]);
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { token, user } = useUser();
   const subtext =
     "계속 변동하는 물가에 맞게 생활하고 계신가요?\n합리적인 장바구니를 위해\nKU_PRICESNAP로 관리하세요.";
 
@@ -116,7 +116,7 @@ function LandingPage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             product_id: item.product_id,
@@ -151,7 +151,7 @@ function LandingPage() {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
@@ -163,7 +163,7 @@ function LandingPage() {
     };
 
     fetchTrends();
-  }, [user]);
+  }, [user, token]);
 
   return (
     <Container>

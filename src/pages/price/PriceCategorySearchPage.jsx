@@ -61,7 +61,7 @@ const Text = styled.div`
 function PriceCategorySearchPage() {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
-  const user = useUser();
+  const token = useUser();
 
   const handleCategorySelect = (categoryId) => {
     setSelectedCategoryId(categoryId);
@@ -80,7 +80,7 @@ function PriceCategorySearchPage() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );

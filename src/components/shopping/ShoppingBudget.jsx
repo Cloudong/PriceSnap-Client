@@ -99,7 +99,7 @@ function ShoppingBudget({ budget, present, hideButtons }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newBudget, setNewBudget] = useState("");
   const state = budget - present;
-  const user = useUser();
+  const token = useUser();
 
   const handleSetBudget = async () => {
     if (!newBudget || isNaN(newBudget)) {
@@ -114,7 +114,7 @@ function ShoppingBudget({ budget, present, hideButtons }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             budget: parseInt(newBudget),
@@ -125,8 +125,6 @@ function ShoppingBudget({ budget, present, hideButtons }) {
       if (!response.ok) {
         throw new Error("예산 설정에 실패했습니다.");
       }
-
-      // API 호출 성공 후 페이지 새로고침
       window.location.reload();
     } catch (error) {
       console.error("예산 설정 실패:", error);

@@ -31,7 +31,7 @@ function RegisterPage() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const user = useUser();
+  const token = useUser();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -43,7 +43,7 @@ function RegisterPage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             userId: id,

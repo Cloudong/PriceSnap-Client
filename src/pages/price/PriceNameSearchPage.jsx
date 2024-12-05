@@ -59,7 +59,7 @@ const Text = styled.div`
 
 function PriceNameSearchPage() {
   const [searchResults, setSearchResults] = useState([]);
-  const user = useUser();
+  const token = useUser();
 
   const handleSearch = async (name) => {
     try {
@@ -69,7 +69,7 @@ function PriceNameSearchPage() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
