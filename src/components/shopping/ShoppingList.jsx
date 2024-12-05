@@ -30,7 +30,6 @@ function ShoppingList({ hideButtons }) {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include",
         }
       );
 

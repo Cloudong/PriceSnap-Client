@@ -5,31 +5,21 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("jwtToken"));
 
-  const checkSession = async () => {
-    try {
-      const response = await fetch(
-        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/users/session",
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        setUser(data.user);
-        setIsLoggedin(true);
-      } else {
-        setUser(null);
-        setIsLoggedin(false);
+  useEffect(() => {
+    // 컴포넌트 마운트 시 로컬 스토리지의 토큰 확인
+    const storedToken = localStorage.getItem("jwtToken");
+    if (storedToken) {
+      setToken(storedToken);
+      setIsLoggedin(true);
+      // 토큰이 있으면 사용자 정보도 로컬 스토리지에서 가져옴
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      if (storedUser) {
+        setUser(storedUser);
       }
-    } catch (error) {
-      console.error("Failed to check session:", error);
-      setUser(null);
-      setIsLoggedin(false);
     }
-  };
+  }, []);
 
   const login = async (user_id, password) => {
     try {
@@ -40,7 +30,6 @@ export const UserProvider = ({ children }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include",
           body: JSON.stringify({ userId: user_id, user_password: password }),
         }
       );
@@ -49,6 +38,10 @@ export const UserProvider = ({ children }) => {
         const data = await response.json();
         setUser(data.user);
         setIsLoggedin(true);
+        setToken(data.token);
+        // 로컬 스토리지에 토큰과 사용자 정보 저장
+        localStorage.setItem("jwtToken", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
       } else {
         const errorData = await response.json();
         throw new Error(errorData.message);
@@ -72,6 +65,13 @@ export const UserProvider = ({ children }) => {
       if (response.ok) {
         setUser(null);
         setIsLoggedin(false);
+        // 로컬 스토리지에서 토큰과 사용자 정보 제거
+        localStorage.removeItem("jwtToken");
+        localStorage.removeItem("user");
+        // 상태 초기화
+        setUser(null);
+        setIsLoggedin(false);
+        setToken(null);
       } else {
         const errorData = await response.json();
         throw new Error(errorData.message);
@@ -81,12 +81,8 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    checkSession();
-  }, []);
-
   return (
-    <UserContext.Provider value={{ user, isLoggedin, login, logout }}>
+    <UserContext.Provider value={{ user, isLoggedin, token, login, logout }}>
       {children}
     </UserContext.Provider>
   );

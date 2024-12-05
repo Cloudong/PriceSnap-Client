@@ -117,7 +117,6 @@ function LandingPage() {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include",
           body: JSON.stringify({
             product_id: item.product_id,
             quantity: 1,
@@ -152,7 +151,6 @@ function LandingPage() {
             headers: {
               "Content-Type": "application/json",
             },
-            credentials: "include",
           }
         );
         const data = await response.json();

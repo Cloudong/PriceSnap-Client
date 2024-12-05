@@ -97,7 +97,6 @@ function PriceItem(props) {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include",
           body: JSON.stringify({
             product_id: product_id,
             quantity: count,

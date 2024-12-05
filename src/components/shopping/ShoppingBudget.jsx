@@ -113,7 +113,6 @@ function ShoppingBudget({ budget, present, hideButtons }) {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include",
           body: JSON.stringify({
             budget: parseInt(newBudget),
           }),

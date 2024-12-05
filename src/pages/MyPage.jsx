@@ -42,7 +42,6 @@ function MyPage() {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include",
           body: JSON.stringify({ newName: name }),
         }
       );
