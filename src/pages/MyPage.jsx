@@ -53,6 +53,8 @@ function MyPage() {
         const errorData = await response.json();
         throw new Error(errorData.message);
       }
+      alert("닉네임이 성공적으로 변경되었습니다.");
+      navigate("/");
       console.log("닉네임 수정 성공");
     } catch (err) {
       console.log("닉네임 수정 실패");
@@ -70,14 +72,9 @@ function MyPage() {
           placeholder="닉네임을 입력해주세요"
           onChange={(e) => setName(e.target.value)}
         />
+        <Button type="submit" title="프로필 수정 완료" className="brown" />
         <Button
-          title="프로필 수정 완료"
-          className="brown"
-          onClick={() => {
-            navigate("/");
-          }}
-        />
-        <Button
+          type="button"
           title="로그아웃"
           onClick={() => {
             logout();
