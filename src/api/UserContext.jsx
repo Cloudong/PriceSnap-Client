@@ -59,8 +59,9 @@ export const UserProvider = ({ children }) => {
         {
           method: "DELETE",
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
-          }, // 쿠키 포함
+          },
         }
       );
 
