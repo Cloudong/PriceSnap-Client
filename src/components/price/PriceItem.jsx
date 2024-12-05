@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "../Button";
+import { useUser } from "../../api/UserContext";
 
 const Container = styled.div`
   width: 809px;
@@ -87,6 +88,7 @@ function PriceItem(props) {
   } = props;
 
   const [count, setCount] = useState(1);
+  const user = useUser();
 
   const handleAddToCart = async () => {
     try {
@@ -96,6 +98,7 @@ function PriceItem(props) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             product_id: product_id,

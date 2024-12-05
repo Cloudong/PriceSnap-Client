@@ -3,6 +3,7 @@ import styled from "styled-components";
 import MainBar from "../../bar/MainBar";
 import Search from "../../components/price/Search";
 import PriceItem from "../../components/price/PriceItem";
+import { useUser } from "../../api/UserContext";
 
 const Container = styled.div`
   width: calc(100%);
@@ -58,6 +59,7 @@ const Text = styled.div`
 
 function PriceNameSearchPage() {
   const [searchResults, setSearchResults] = useState([]);
+  const user = useUser();
 
   const handleSearch = async (name) => {
     try {
@@ -67,6 +69,7 @@ function PriceNameSearchPage() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
           },
         }
       );

@@ -116,6 +116,7 @@ function LandingPage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             product_id: item.product_id,
@@ -150,6 +151,7 @@ function LandingPage() {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${user.token}`,
             },
           }
         );

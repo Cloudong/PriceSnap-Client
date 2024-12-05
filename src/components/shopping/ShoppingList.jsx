@@ -4,6 +4,7 @@ import { DragDropContext } from "@hello-pangea/dnd";
 import styled from "styled-components";
 import ShoppingListItems from "./ShoppingListItems";
 import ShoppingListButtons from "./ShoppingListButtons";
+import { useUser } from "../../api/UserContext";
 
 const ListContainer = styled.div`
   width: 100%;
@@ -16,35 +17,37 @@ function ShoppingList({ hideButtons }) {
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const user = useUser();
 
   useEffect(() => {
-    fetchShoppingList();
-  }, []);
+    const fetchShoppingList = async () => {
+      try {
+        const response = await fetch(
+          "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/carts",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
 
-  const fetchShoppingList = async () => {
-    try {
-      const response = await fetch(
-        "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/carts",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
+        if (!response.ok) {
+          throw new Error("리스트 불러오기에 실패했습니다.");
         }
-      );
 
-      if (!response.ok) {
-        throw new Error("리스트 불러오기에 실패했습니다.");
+        const data = await response.json();
+        setItems(data.items || []);
+      } catch (error) {
+        console.error("리스트 불러오기 실패:", error);
+      } finally {
+        setIsLoading(false);
       }
+    };
 
-      const data = await response.json();
-      setItems(data.items || []);
-    } catch (error) {
-      console.error("리스트 불러오기 실패:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    fetchShoppingList();
+  }, [user.token]);
 
   const handleDragEnd = (result) => {
     if (!result.destination) return;
@@ -68,6 +71,7 @@ function ShoppingList({ hideButtons }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
           },
           credentials: "include",
           body: JSON.stringify({

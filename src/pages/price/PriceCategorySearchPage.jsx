@@ -4,6 +4,7 @@ import MainBar from "../../bar/MainBar";
 import Category from "../../components/price/Category";
 import Button from "../../components/Button";
 import PriceItem from "../../components/price/PriceItem";
+import { useUser } from "../../api/UserContext";
 
 const Container = styled.div`
   width: calc(100%);
@@ -60,6 +61,7 @@ const Text = styled.div`
 function PriceCategorySearchPage() {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
+  const user = useUser();
 
   const handleCategorySelect = (categoryId) => {
     setSelectedCategoryId(categoryId);
@@ -78,6 +80,7 @@ function PriceCategorySearchPage() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
           },
         }
       );

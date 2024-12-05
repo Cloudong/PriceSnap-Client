@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FiDollarSign } from "react-icons/fi";
 import Button from "../Button";
+import { useUser } from "../../api/UserContext";
 
 const Container = styled.div`
   width: 100%;
@@ -98,6 +99,7 @@ function ShoppingBudget({ budget, present, hideButtons }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newBudget, setNewBudget] = useState("");
   const state = budget - present;
+  const user = useUser();
 
   const handleSetBudget = async () => {
     if (!newBudget || isNaN(newBudget)) {
@@ -112,6 +114,7 @@ function ShoppingBudget({ budget, present, hideButtons }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             budget: parseInt(newBudget),

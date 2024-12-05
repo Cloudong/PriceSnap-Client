@@ -58,7 +58,9 @@ export const UserProvider = ({ children }) => {
         "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/users/logout",
         {
           method: "DELETE",
-          credentials: "include", // 쿠키 포함
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }, // 쿠키 포함
         }
       );
 

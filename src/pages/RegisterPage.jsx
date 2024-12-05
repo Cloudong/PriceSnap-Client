@@ -4,6 +4,7 @@ import MainBar from "../bar/MainBar";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import InputFieldContainer from "../components/InputFieldContainer";
+import { useUser } from "../api/UserContext";
 
 const Container = styled.div`
   width: calc(100%);
@@ -30,6 +31,7 @@ function RegisterPage() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const user = useUser();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -41,6 +43,7 @@ function RegisterPage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
             userId: id,

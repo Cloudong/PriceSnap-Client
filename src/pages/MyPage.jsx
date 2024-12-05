@@ -28,7 +28,7 @@ const MyPageForm = styled.form`
 
 function MyPage() {
   const [name, setName] = useState("");
-  const { logout } = useUser();
+  const { user, logout } = useUser();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -41,6 +41,7 @@ function MyPage() {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({ newName: name }),
         }
