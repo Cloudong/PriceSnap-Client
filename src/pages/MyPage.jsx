@@ -27,9 +27,9 @@ const MyPageForm = styled.form`
 `;
 
 function MyPage() {
-  const [name, setName] = useState("");
-  const { logout, token } = useUser();
+  const { logout, token, user, setUser } = useUser();
   const navigate = useNavigate();
+  const [name, setName] = useState(user?.name || "");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,15 +49,20 @@ function MyPage() {
         }
       );
 
-      if (!response.ok) {
+      if (response.ok) {
+        const updatedUser = { ...user, name: name };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        setUser(updatedUser);
+
+        alert("닉네임이 성공적으로 변경되었습니다.");
+        navigate("/");
+      } else {
         const errorData = await response.json();
         throw new Error(errorData.message);
       }
-      alert("닉네임이 성공적으로 변경되었습니다.");
-      navigate("/");
-      console.log("닉네임 수정 성공");
-    } catch (err) {
-      console.log("닉네임 수정 실패");
+    } catch (error) {
+      console.error("Error updating name:", error);
+      alert("닉네임 변경에 실패했습니다.");
     }
   };
 
