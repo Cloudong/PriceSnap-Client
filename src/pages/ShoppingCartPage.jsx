@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MainBar from "../bar/MainBar";
-import ShoppingList from "../components/shopping/ShoppingList";
-import ShoppingBudget from "../components/shopping/ShoppingBudget";
+import ShoppingComponent from "../components/shopping/ShoppingComponent";
 
 const Container = styled.div`
   width: calc(100%);
@@ -13,13 +12,13 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const Wrapper = styled.div`
+const ShoppingContainer = styled.div`
+  min-height: 100px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding-top: 50px;
+  padding-top: 40px;
 `;
 
 const Text = styled.div`
@@ -37,7 +36,7 @@ const Text = styled.div`
     color: #757575;
     font-size: 28px;
     font-weight: 400;
-    padding-bottom: 60px;
+    padding-bottom: 30px;
   }
 
   &.type {
@@ -53,10 +52,9 @@ function ShoppingCartPage() {
       <MainBar />
       <Text className="title">장바구니 관리</Text>
       <Text className="sub">수정하고 싶은 상품을 선택하세요</Text>
-      <ShoppingBudget readOnly={false} />
-      <Wrapper>
-        <ShoppingList readOnly={false} />
-      </Wrapper>
+      <ShoppingContainer>
+        <ShoppingComponent hideButtons={false} />
+      </ShoppingContainer>
     </Container>
   );
 }

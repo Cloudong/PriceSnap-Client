@@ -4,7 +4,7 @@ import Button from "../Button";
 
 const Container = styled.div`
   width: 320px;
-  height: 79px;
+  height: 100px;
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
@@ -23,17 +23,17 @@ const Text = styled.div`
   white-space: pre-wrap;
 
   &.title {
-    font-size: 13px;
+    font-size: 21px;
     font-weight: 700;
   }
 
   &.sub {
-    font-size: 13px;
+    font-size: 19px;
     font-weight: 400;
   }
 
   &.dosage {
-    font-size: 10px;
+    font-size: 17px;
     font-weight: 400;
     color: #979797;
   }

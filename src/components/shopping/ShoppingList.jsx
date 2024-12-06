@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { DragDropContext } from "@hello-pangea/dnd";
 import styled from "styled-components";
@@ -13,43 +13,9 @@ const ListContainer = styled.div`
   padding: 20px;
 `;
 
-function ShoppingList({ hideButtons }) {
+function ShoppingList({ items, setItems, isLoading, hideButtons }) {
   const navigate = useNavigate();
   const { token } = useUser();
-  const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchShoppingList = async () => {
-      try {
-        const response = await fetch(
-          "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/carts",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("리스트 불러오기에 실패했습니다.");
-        }
-
-        const data = await response.json();
-        setItems(data.items || []);
-      } catch (error) {
-        console.error("리스트 불러오기 실패:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    if (token) {
-      fetchShoppingList();
-    }
-  }, [token]);
 
   const handleDragEnd = (result) => {
     if (!result.destination) return;
@@ -78,7 +44,7 @@ function ShoppingList({ hideButtons }) {
           body: JSON.stringify({
             items: items.map((item, index) => ({
               ...item,
-              order: index,
+              priority: index,
             })),
           }),
         }
@@ -91,7 +57,7 @@ function ShoppingList({ hideButtons }) {
       alert("장바구니가 저장되었습니다.");
     } catch (error) {
       console.error("저장 실패:", error);
-      alert("저장에 실패했습니다. 다시 시도해주��요.");
+      alert("저장에 실패했습니다. 다시 시도해주세요.");
     }
   };
 

@@ -22,17 +22,17 @@ const Text = styled.div`
   white-space: pre-wrap;
 
   &.title {
-    font-size: 13px;
+    font-size: 21px;
     font-weight: 700;
   }
 
   &.sub {
-    font-size: 13px;
+    font-size: 19px;
     font-weight: 400;
   }
 
   &.dosage {
-    font-size: 10px;
+    font-size: 17px;
     font-weight: 400;
     color: #979797;
   }
@@ -54,7 +54,7 @@ function CurrentPriceItem(props) {
           {price_decline ? price_decline : "변동률"}
         </Text>
       </TextContainer>
-      <Button className="green" title="추가" onClick={handler} />
+      <Button className="smallgreen" title="추가" onClick={handler} />
     </Container>
   );
 }

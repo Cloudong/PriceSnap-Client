@@ -37,6 +37,7 @@ export const UserProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         setUser(data.user);
+        console.log(data.user);
         setIsLoggedin(true);
         setToken(data.token);
         // 로컬 스토리지에 토큰과 사용자 정보 저장

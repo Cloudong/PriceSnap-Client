@@ -33,6 +33,12 @@ const StyledButton = styled.button`
     border: 1px solid #48582f;
   }
 
+  &.smallgreen {
+    min-width: 70px;
+    background-color: #48582f;
+    border: 1px solid #48582f;
+  }
+
   &.red {
     min-width: 135px;
     background-color: #d53d3d;

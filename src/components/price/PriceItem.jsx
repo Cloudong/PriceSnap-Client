@@ -88,7 +88,7 @@ function PriceItem(props) {
   } = props;
 
   const [count, setCount] = useState(1);
-  const token = useUser();
+  const { token } = useUser();
 
   const handleAddToCart = async () => {
     try {

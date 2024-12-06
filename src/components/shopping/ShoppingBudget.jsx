@@ -5,9 +5,10 @@ import Button from "../Button";
 import { useUser } from "../../api/UserContext";
 
 const Container = styled.div`
-  width: 100%;
+  width: 520px;
   height: 180px;
   padding: 10px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -97,9 +98,9 @@ const BudgetInput = styled.input`
 
 function ShoppingBudget({ budget, present, hideButtons }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [newBudget, setNewBudget] = useState("");
-  const state = budget - present;
-  const token = useUser();
+  const [newBudget, setNewBudget] = useState();
+  const state = budget === 0 ? 0 : budget - present;
+  const { token } = useUser();
 
   const handleSetBudget = async () => {
     if (!newBudget || isNaN(newBudget)) {
@@ -132,7 +133,7 @@ function ShoppingBudget({ budget, present, hideButtons }) {
     }
   };
 
-  if (budget == null && !hideButtons) {
+  if (!hideButtons) {
     return (
       <>
         {isEditing ? (
@@ -151,14 +152,42 @@ function ShoppingBudget({ budget, present, hideButtons }) {
             />
           </BudgetInputContainer>
         ) : (
-          <Button
-            title="예산 설정하기"
-            className="green"
-            onClick={() => setIsEditing(true)}
-          />
+          <>
+            <Button
+              title="예산 설정하기"
+              className="green"
+              onClick={() => setIsEditing(true)}
+            />
+            {budget === 0 && (
+              <>
+                <TextMain className="title">등록된 예산이 없습니다</TextMain>
+                <TextMain className="sub">내 예산을 설정해보세요!</TextMain>
+              </>
+            )}
+            {budget !== 0 && (
+              <Container>
+                <ContentContainer>
+                  <FiDollarSign color="#daa520" size={32} />
+                  <Text className="budget">예산</Text>
+                  <Text className="money">{`${budget}`}₩</Text>
+                </ContentContainer>
+                <ContentContainer>
+                  <FiDollarSign color="#47572f" size={32} />
+                  <Text className="present">현재</Text>
+                  <Text className="money">{`${present}`}₩</Text>
+                </ContentContainer>
+                <hr color="#432a00" width="520px" height="1px" />
+                <ContentContainer>
+                  <FiDollarSign color="#432a00" size={32} />
+                  <Text className={state >= 0 ? "stable" : "warning"}>
+                    {state >= 0 ? "안정" : "초과"}
+                  </Text>
+                  <Text className="money">{state}₩</Text>
+                </ContentContainer>
+              </Container>
+            )}
+          </>
         )}
-        <TextMain className="title">등록된 예산이 없습니다</TextMain>
-        <TextMain className="sub">내 예산을 설정해보세요!</TextMain>
       </>
     );
   }
@@ -169,30 +198,7 @@ function ShoppingBudget({ budget, present, hideButtons }) {
         <FiDollarSign color="#daa520" size={32} />
         <Text className="budget">예산</Text>
         <Text className="money">{`${budget}`}₩</Text>
-        {!hideButtons && (
-          <Button
-            title="수정"
-            className="green"
-            onClick={() => setIsEditing(true)}
-          />
-        )}
       </ContentContainer>
-      {isEditing && (
-        <BudgetInputContainer>
-          <BudgetInput
-            type="number"
-            value={newBudget}
-            onChange={(e) => setNewBudget(e.target.value)}
-            placeholder="새로운 예산을 입력하세요"
-          />
-          <Button title="설정" className="brown" onClick={handleSetBudget} />
-          <Button
-            title="취소"
-            className="yellow"
-            onClick={() => setIsEditing(false)}
-          />
-        </BudgetInputContainer>
-      )}
       <ContentContainer>
         <FiDollarSign color="#47572f" size={32} />
         <Text className="present">현재</Text>

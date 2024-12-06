@@ -59,7 +59,7 @@ const Text = styled.div`
 
 function PriceNameSearchPage() {
   const [searchResults, setSearchResults] = useState([]);
-  const token = useUser();
+  const { token } = useUser();
 
   const handleSearch = async (name) => {
     try {

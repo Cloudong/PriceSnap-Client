@@ -72,12 +72,33 @@ function ShoppingListItems({ items, onDelete, hideButtons }) {
     );
   }
 
+  if (hideButtons) {
+    return (
+      <ItemList className="hide">
+        {items.map((item, index) => (
+          <DraggableItem key={item.product_id}>
+            <ShoppingItem
+              name={item.product_name}
+              price={item.price}
+              num={item.quantity}
+              hideButtons={hideButtons}
+            />
+          </DraggableItem>
+        ))}
+      </ItemList>
+    );
+  }
+
   return (
     <Droppable droppableId="droppable">
       {(provided) => (
         <ItemList {...provided.droppableProps} ref={provided.innerRef}>
           {items.map((item, index) => (
-            <Draggable key={item.id} draggableId={item.id} index={index}>
+            <Draggable
+              key={item.product_id}
+              draggableId={item.product_id.toString()}
+              index={index}
+            >
               {(provided, snapshot) => (
                 <DraggableItem
                   ref={provided.innerRef}
@@ -88,9 +109,9 @@ function ShoppingListItems({ items, onDelete, hideButtons }) {
                     <DragHandle />
                   </div>
                   <ShoppingItem
-                    name={item.name}
+                    name={item.product_name}
                     price={item.price}
-                    num={item.num}
+                    num={item.quantity}
                     handler={() => onDelete(index)}
                     hideButtons={hideButtons}
                   />

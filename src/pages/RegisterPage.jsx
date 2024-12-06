@@ -31,7 +31,7 @@ function RegisterPage() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const token = useUser();
+  const { token } = useUser();
 
   const handleRegister = async (e) => {
     e.preventDefault();

@@ -6,22 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../api/UserContext";
 import { useState, useEffect } from "react";
 import CurrentPriceItem from "../components/price/CurrentPriceItem";
-import ShoppingBudget from "../components/shopping/ShoppingBudget";
-import ShoppingList from "../components/shopping/ShoppingList";
+import ShoppingComponent from "../components/shopping/ShoppingComponent";
 
 const Container = styled.div`
   width: calc(100%);
   display: flex;
   flex-direction: column;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding-top: 50px;
 `;
 
 const TextContainer = styled.div`
@@ -74,7 +64,7 @@ const SubText = styled.h3`
 `;
 
 const UserContainer = styled.div`
-  min-height: 180px;
+  min-height: 160px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -87,8 +77,8 @@ const ShoppingContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-right: 95px;
-  padding-top: 40px;
+  align-items: center;
+  padding-top: 20px;
 `;
 
 const TrendContainer = styled.div`
@@ -98,7 +88,7 @@ const TrendContainer = styled.div`
   align-items: center;
   margin: 0 auto;
   gap: 20px;
-  padding: 0 95px;
+  padding: 80px 95px;
 `;
 
 function LandingPage() {
@@ -216,10 +206,7 @@ function LandingPage() {
             />
           </UserContainer>
           <ShoppingContainer>
-            <ShoppingBudget hideButtons={true} />
-            <Wrapper>
-              <ShoppingList hideButtons={true} />
-            </Wrapper>
+            <ShoppingComponent hideButtons={true} />
           </ShoppingContainer>
         </>
       ) : (
