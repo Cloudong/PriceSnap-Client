@@ -30,7 +30,6 @@ function ShoppingList({ hideButtons }) {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
-            credentials: "include",
           }
         );
 
@@ -76,7 +75,6 @@ function ShoppingList({ hideButtons }) {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          credentials: "include",
           body: JSON.stringify({
             items: items.map((item, index) => ({
               ...item,
