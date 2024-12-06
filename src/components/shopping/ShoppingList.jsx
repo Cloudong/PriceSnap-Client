@@ -15,9 +15,9 @@ const ListContainer = styled.div`
 
 function ShoppingList({ hideButtons }) {
   const navigate = useNavigate();
+  const { token } = useUser();
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const token = useUser();
 
   useEffect(() => {
     const fetchShoppingList = async () => {
@@ -30,6 +30,7 @@ function ShoppingList({ hideButtons }) {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
+            credentials: "include",
           }
         );
 
@@ -46,7 +47,9 @@ function ShoppingList({ hideButtons }) {
       }
     };
 
-    fetchShoppingList();
+    if (token) {
+      fetchShoppingList();
+    }
   }, [token]);
 
   const handleDragEnd = (result) => {
@@ -90,7 +93,7 @@ function ShoppingList({ hideButtons }) {
       alert("장바구니가 저장되었습니다.");
     } catch (error) {
       console.error("저장 실패:", error);
-      alert("저장에 실패했습니다. 다시 시도해주세요.");
+      alert("저장에 실패했습니다. 다시 시도해주��요.");
     }
   };
 

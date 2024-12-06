@@ -27,7 +27,7 @@ const MyPageForm = styled.form`
 `;
 
 function MyPage() {
-  const { logout, token, user, setUser } = useUser();
+  const { logout, token, user } = useUser();
   const navigate = useNavigate();
   const [name, setName] = useState(user?.name || "");
 
@@ -52,10 +52,9 @@ function MyPage() {
       if (response.ok) {
         const updatedUser = { ...user, name: name };
         localStorage.setItem("user", JSON.stringify(updatedUser));
-        setUser(updatedUser);
 
         alert("닉네임이 성공적으로 변경되었습니다.");
-        navigate("/");
+        window.location.href = "/";
       } else {
         const errorData = await response.json();
         throw new Error(errorData.message);
