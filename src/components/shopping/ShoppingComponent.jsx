@@ -39,7 +39,10 @@ function ShoppingComponent({ hideButtons }) {
         }
 
         const data = await response.json();
-        setItems(data.cart.cart_items || []);
+        const sortedItems = (data.cart.cart_items || []).sort(
+          (a, b) => a.priority - b.priority
+        );
+        setItems(sortedItems);
         setBudget(data.cart.budget);
         setPresent(data.cart.total_price);
         console.log(data);

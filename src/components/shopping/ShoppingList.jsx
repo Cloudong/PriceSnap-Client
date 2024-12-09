@@ -44,7 +44,7 @@ function ShoppingList({ items, setItems, isLoading, hideButtons }) {
           body: JSON.stringify({
             items: items.map((item, index) => ({
               ...item,
-              priority: index,
+              priority: index + 1,
             })),
           }),
         }
