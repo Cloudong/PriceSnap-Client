@@ -39,14 +39,14 @@ const Text = styled.div`
     width: 100px;
     font-size: 20px;
     font-weight: 800;
-    color: #8fa86a;
+    color: #d53d3d;
   }
 
   &.decrement {
     width: 100px;
     font-size: 20px;
     font-weight: 800;
-    color: #d53d3d;
+    color: #8fa86a;
   }
 
   &.count {
@@ -124,7 +124,7 @@ function PriceItem(props) {
   };
 
   const getTextClassproduct_Name = (price) => {
-    return price > 0 ? "increment" : "decrement";
+    return price > 100 ? "increment" : "decrement";
   };
 
   return (
