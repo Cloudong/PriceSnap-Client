@@ -171,12 +171,12 @@ function ShoppingBudget({ budget, present, hideButtons }) {
                 <ContentContainer>
                   <FiDollarSign color="#daa520" size={32} />
                   <Text className="budget">예산</Text>
-                  <Text className="money">{`${formattedBudget}`}₩</Text>
+                  <Text className="money">{`${formattedBudget}`}</Text>
                 </ContentContainer>
                 <ContentContainer>
                   <FiDollarSign color="#47572f" size={32} />
                   <Text className="present">현재</Text>
-                  <Text className="money">{`${formattedPresent}`}₩</Text>
+                  <Text className="money">{`${formattedPresent}`}</Text>
                 </ContentContainer>
                 <hr color="#432a00" width="520px" height="1px" />
                 <ContentContainer>
@@ -199,12 +199,12 @@ function ShoppingBudget({ budget, present, hideButtons }) {
       <ContentContainer>
         <FiDollarSign color="#daa520" size={32} />
         <Text className="budget">예산</Text>
-        <Text className="money">{`${budget}`}₩</Text>
+        <Text className="money">{`${budget}`}</Text>
       </ContentContainer>
       <ContentContainer>
         <FiDollarSign color="#47572f" size={32} />
         <Text className="present">현재</Text>
-        <Text className="money">{`${present}`}₩</Text>
+        <Text className="money">{`${present}`}</Text>
       </ContentContainer>
       <hr color="#432a00" width="520px" height="1px" />
       <ContentContainer>
