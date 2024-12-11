@@ -167,7 +167,7 @@ function LandingPage() {
           </TextContainer>
           <UserContainer>
             <TextContainer className="sub">
-              <TitleText>이번주 동향</TitleText>
+              <TitleText>이번달 동향</TitleText>
               <SubTitleText className="sub">
                 물가 동향으로 효율적인 소비 생활을 계획해보세요!
               </SubTitleText>
