@@ -184,7 +184,7 @@ function ShoppingBudget({ budget, present, hideButtons }) {
                   <Text className={state >= 0 ? "stable" : "warning"}>
                     {state >= 0 ? "안정" : "초과"}
                   </Text>
-                  <Text className="money">{state}₩</Text>
+                  <Text className="money">{state}</Text>
                 </ContentContainer>
               </Container>
             )}
@@ -212,7 +212,7 @@ function ShoppingBudget({ budget, present, hideButtons }) {
         <Text className={state >= 0 ? "stable" : "warning"}>
           {state >= 0 ? "안정" : "초과"}
         </Text>
-        <Text className="money">{state}₩</Text>
+        <Text className="money">{state}</Text>
       </ContentContainer>
     </Container>
   );
