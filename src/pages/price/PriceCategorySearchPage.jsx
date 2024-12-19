@@ -65,7 +65,7 @@ function PriceCategorySearchPage() {
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
-  const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0"); // 현재 월 (0부터 시작하므로 +1)
+  const currentMonth = String(currentDate.getMonth()).padStart(2, "0");
   const currentSuffix = `_${currentYear}${currentMonth}`;
 
   const handleCategorySelect = (categoryId) => {
@@ -115,11 +115,11 @@ function PriceCategorySearchPage() {
       <PriceWrapper>
         {Array.isArray(searchResults.products) &&
           searchResults.products
-            .filter((item) => item.product_id.endsWith(currentSuffix)) // 현재 달 데이터만 필터링
+            .filter((item) => item.product_id.endsWith(currentSuffix))
             .map((item) => (
               <PriceItem
                 key={item.product_id}
-                product_id={item.product_id} // product_id 수정 불필요
+                product_id={item.product_id}
                 product_name={item.product_name}
                 current_month_price={item.current_month_price}
                 previous_month_price={item.previous_month_price}

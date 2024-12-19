@@ -63,7 +63,7 @@ function PriceNameSearchPage() {
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
-  const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0"); // 현재 월 (0부터 시작하므로 +1)
+  const currentMonth = String(currentDate.getMonth()).padStart(2, "0"); // 현재 월 (0부터 시작하므로 +1)
   const currentSuffix = `_${currentYear}${currentMonth}`;
 
   const handleSearch = async (name) => {
