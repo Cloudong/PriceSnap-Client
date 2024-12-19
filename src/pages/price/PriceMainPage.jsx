@@ -63,6 +63,11 @@ function PriceMainPage() {
   const navigate = useNavigate();
   const { user, token } = useUser();
 
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0"); // 현재 월 (0부터 시작하므로 +1)
+  const currentSuffix = `_${currentYear}${currentMonth}`;
+
   useEffect(() => {
     const fetchPrice = async () => {
       if (!user) {
@@ -120,16 +125,18 @@ function PriceMainPage() {
       </Wrapper>
       <PriceWrapper>
         {Array.isArray(price.products) &&
-          price.products.map((item) => (
-            <PriceItem
-              key={item.product_id}
-              product_id={item.product_id}
-              product_name={item.product_name}
-              current_month_price={item.current_month_price}
-              previous_month_price={item.previous_month_price}
-              previous_two_months_price={item.previous_two_months_price}
-            />
-          ))}
+          price.products
+            .filter((item) => item.product_id.endsWith(currentSuffix)) // 현재 달 데이터만 필터링
+            .map((item) => (
+              <PriceItem
+                key={item.product_id}
+                product_id={item.product_id} // product_id 수정 불필요
+                product_name={item.product_name}
+                current_month_price={item.current_month_price}
+                previous_month_price={item.previous_month_price}
+                previous_two_months_price={item.previous_two_months_price}
+              />
+            ))}
       </PriceWrapper>
     </Container>
   );
