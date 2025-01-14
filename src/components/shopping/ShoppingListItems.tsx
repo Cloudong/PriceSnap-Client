@@ -1,15 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import { Droppable, Draggable } from "@hello-pangea/dnd";
+import {
+  Droppable,
+  Draggable,
+  DraggableProvided,
+  DraggableStateSnapshot,
+} from "@hello-pangea/dnd";
 import ShoppingItem from "./ShoppingItem";
 
+// Styled Components
 const ItemList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
 `;
 
-const DraggableItem = styled.div`
+const DraggableItem = styled.div<{ $isDragging: boolean }>`
   display: flex;
   align-items: center;
   background: ${(props) => (props.$isDragging ? "#f5f5f5" : "white")};
@@ -62,7 +68,24 @@ const Text = styled.div`
   }
 `;
 
-function ShoppingListItems({ items, onDelete, hideButtons }) {
+interface ShoppingItemType {
+  product_id: number;
+  product_name: string;
+  price: number;
+  quantity: number;
+}
+
+interface ShoppingListItemsProps {
+  items: ShoppingItemType[];
+  onDelete: (index: number) => void;
+  hideButtons?: boolean;
+}
+
+const ShoppingListItems: React.FC<ShoppingListItemsProps> = ({
+  items,
+  onDelete,
+  hideButtons,
+}) => {
   if (items.length === 0) {
     return (
       <TextContainer>
@@ -75,8 +98,8 @@ function ShoppingListItems({ items, onDelete, hideButtons }) {
   if (hideButtons) {
     return (
       <ItemList className="hide">
-        {items.map((item, index) => (
-          <DraggableItem key={item.product_id}>
+        {items.map((item) => (
+          <DraggableItem key={item.product_id} $isDragging={false}>
             <ShoppingItem
               name={item.product_name}
               price={item.price}
@@ -99,7 +122,10 @@ function ShoppingListItems({ items, onDelete, hideButtons }) {
               draggableId={item.product_id.toString()}
               index={index}
             >
-              {(provided, snapshot) => (
+              {(
+                provided: DraggableProvided,
+                snapshot: DraggableStateSnapshot
+              ) => (
                 <DraggableItem
                   ref={provided.innerRef}
                   {...provided.draggableProps}
@@ -124,6 +150,6 @@ function ShoppingListItems({ items, onDelete, hideButtons }) {
       )}
     </Droppable>
   );
-}
+};
 
 export default ShoppingListItems;

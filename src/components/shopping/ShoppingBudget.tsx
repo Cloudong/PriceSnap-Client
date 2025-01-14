@@ -98,14 +98,14 @@ const BudgetInput = styled.input`
 
 function ShoppingBudget({ budget, present, hideButtons }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [newBudget, setNewBudget] = useState();
+  const [newBudget, setNewBudget] = useState("");
   const state = budget === 0 ? 0 : Number((budget - present).toFixed(3));
   const formattedBudget = Number(budget.toFixed(3));
   const formattedPresent = Number(present.toFixed(3));
   const { token } = useUser();
 
   const handleSetBudget = async () => {
-    if (!newBudget || isNaN(newBudget)) {
+    if (!newBudget || isNaN(parseInt(newBudget))) {
       alert("올바른 금액을 입력해주세요.");
       return;
     }
@@ -120,7 +120,7 @@ function ShoppingBudget({ budget, present, hideButtons }) {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            budget: parseInt(newBudget),
+            budget: newBudget,
           }),
         }
       );
@@ -178,7 +178,7 @@ function ShoppingBudget({ budget, present, hideButtons }) {
                   <Text className="present">현재</Text>
                   <Text className="money">{`${formattedPresent}`}</Text>
                 </ContentContainer>
-                <hr color="#432a00" width="520px" height="1px" />
+                <hr color="#432a00" />
                 <ContentContainer>
                   <FiDollarSign color="#432a00" size={32} />
                   <Text className={state >= 0 ? "stable" : "warning"}>
@@ -206,7 +206,7 @@ function ShoppingBudget({ budget, present, hideButtons }) {
         <Text className="present">현재</Text>
         <Text className="money">{`${present}`}</Text>
       </ContentContainer>
-      <hr color="#432a00" width="520px" height="1px" />
+      <hr color="#432a00" />
       <ContentContainer>
         <FiDollarSign color="#432a00" size={32} />
         <Text className={state >= 0 ? "stable" : "warning"}>

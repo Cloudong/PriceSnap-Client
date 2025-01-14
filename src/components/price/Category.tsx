@@ -2,6 +2,16 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import categoriesData from "../../data/category.json";
 
+interface CategoryType {
+  id: string;
+  name: string;
+  subCategories?: CategoryType[];
+}
+
+interface CategoryProps {
+  onCategorySelect: (categoryId: string | undefined) => void;
+}
+
 const CategoryContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -24,7 +34,7 @@ const CategoryColumn = styled.div`
   border: 1px solid #afb1b6;
 `;
 
-const CategoryItem = styled.div`
+const CategoryItem = styled.div<{ isSelected: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,15 +48,17 @@ const CategoryItem = styled.div`
   }
 `;
 
-const CategoryName = styled.span`
+const CategoryName = styled.span<{ isSelected: boolean }>`
   font-size: 14px;
   color: ${(props) => (props.isSelected ? "#FFFFFF" : "#61646B")};
 `;
 
-const Category = ({ onCategorySelect }) => {
-  const [selectedItems, setSelectedItems] = useState({});
+const Category: React.FC<CategoryProps> = ({ onCategorySelect }) => {
+  const [selectedItems, setSelectedItems] = useState<{
+    [depth: number]: string;
+  }>({});
 
-  const handleSelect = (depth, id) => {
+  const handleSelect = (depth: number, id: string): void => {
     const newSelectedItems = {
       ...selectedItems,
       [depth]: id,
@@ -58,8 +70,9 @@ const Category = ({ onCategorySelect }) => {
   };
 
   const renderCategories = () => {
-    const columns = [];
-    let currentCategories = categoriesData.categories;
+    const columns: JSX.Element[] = [];
+    let currentCategories: CategoryType[] | undefined =
+      categoriesData.categories;
     let depth = 0;
 
     while (currentCategories && currentCategories.length > 0) {

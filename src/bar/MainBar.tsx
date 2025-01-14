@@ -24,7 +24,7 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const LogoImage = styled.div`
+const LogoImage = styled.div<{ image: string }>`
   width: 205px;
   height: 38px;
   background-image: url(${(props) => props.image});
@@ -52,7 +52,7 @@ function MainBar() {
 
   return (
     <Container>
-      <NavItem to="/" exact="true">
+      <NavItem to="/" end>
         <LogoImage image={Logo}></LogoImage>
       </NavItem>
       {user ? (
