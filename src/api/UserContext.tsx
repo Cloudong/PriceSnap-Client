@@ -1,27 +1,52 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 
-const UserContext = createContext();
+interface User {
+  user_id: string;
+  password: string;
+  name: string;
+}
 
-export const UserProvider = ({ children }) => {
-  const [isLoggedin, setIsLoggedin] = useState(false);
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("jwtToken"));
+interface UserContextType {
+  user: User | null;
+  isLoggedin: boolean;
+  token: string | null;
+  login: (user_id: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+}
+
+const UserContext = createContext<UserContextType | undefined>(undefined);
+
+interface UserProviderProps {
+  children: ReactNode;
+}
+
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+  const [isLoggedin, setIsLoggedin] = useState<boolean>(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(
+    localStorage.getItem("jwtToken")
+  );
 
   useEffect(() => {
-    // 컴포넌트 마운트 시 로컬 스토리지의 토큰 확인
     const storedToken = localStorage.getItem("jwtToken");
     if (storedToken) {
       setToken(storedToken);
       setIsLoggedin(true);
-      // 토큰이 있으면 사용자 정보도 로컬 스토리지에서 가져옴
-      const storedUser = JSON.parse(localStorage.getItem("user"));
+
+      const storedUser = localStorage.getItem("user");
       if (storedUser) {
-        setUser(storedUser);
+        setUser(JSON.parse(storedUser));
       }
     }
   }, []);
 
-  const login = async (user_id, password) => {
+  const login = async (user_id: string, password: string): Promise<void> => {
     try {
       const response = await fetch(
         "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/users/login",
@@ -37,10 +62,9 @@ export const UserProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         setUser(data.user);
-        console.log(data.user);
         setIsLoggedin(true);
         setToken(data.token);
-        // 로컬 스토리지에 토큰과 사용자 정보 저장
+
         localStorage.setItem("jwtToken", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
       } else {
@@ -53,7 +77,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const logout = async () => {
+  const logout = async (): Promise<void> => {
     try {
       const response = await fetch(
         "https://rw2644hx4c.execute-api.us-east-1.amazonaws.com/api/users/logout",
@@ -69,13 +93,9 @@ export const UserProvider = ({ children }) => {
       if (response.ok) {
         setUser(null);
         setIsLoggedin(false);
-        // 로컬 스토리지에서 토큰과 사용자 정보 제거
+        setToken(null);
         localStorage.removeItem("jwtToken");
         localStorage.removeItem("user");
-        // 상태 초기화
-        setUser(null);
-        setIsLoggedin(false);
-        setToken(null);
       } else {
         const errorData = await response.json();
         throw new Error(errorData.message);
@@ -92,6 +112,10 @@ export const UserProvider = ({ children }) => {
   );
 };
 
-export const useUser = () => {
-  return useContext(UserContext);
+export const useUser = (): UserContextType => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("useUser must be used within a UserProvider");
+  }
+  return context;
 };
